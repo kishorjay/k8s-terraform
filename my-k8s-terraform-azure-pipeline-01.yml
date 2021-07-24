@@ -23,6 +23,13 @@ steps:
     backendAzureRmContainerName: 'storageacckjcontainer'
     backendAzureRmKey: 'k8s-dev.tfstate'
     allowTelemetryCollection: true
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    environmentServiceName: 'azure-rm-service-conn'
+    #runAzLogin: true
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.securefilepath)'
+    allowTelemetryCollection: true
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
